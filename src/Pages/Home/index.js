@@ -10,8 +10,9 @@ export default function ButtonAppBar() {
     <Container>
       <AppBar position="static">
         <Toolbar>
+          
           <Link to="/produtos" id="btnapp" color="inherit">Produtos</Link>
-          <Link to="/CMV" id="btnapp" color="inherit">CMV</Link>
+          
         </Toolbar>
       </AppBar>
         

@@ -113,14 +113,14 @@ const body = (
   <div style={modalStyle, {backgroundColor:"grey", margin: "290px", }} className={classes.paper}  >
     <form onSubmit={inserirProduto} >
                     
-                    <input type="text" value={newNome} onChange={e => setNewNome(e.target.value)} placeholder="Digite o Produto"/>
-                    <input type="text" value={newValorCompra} onChange={e => setNewValorCompra(e.target.value)} placeholder="Digite o valor do produto em estoque"/>
-                    <input type="text" value={newValorCompraFinal} onChange={e => setNewValorCompraFinal(e.target.value)} placeholder="Digite o valor do produto comprado"/>
-                    <input type="text" value={newEstoqueInicial} onChange={e => setNewEstoqueInicial(e.target.value)} placeholder="Digite a qtd inicial no estoque"/>
-                    <input type="text" value={newEstoqueFinal} onChange={e => setNewEstoqueFinal(e.target.value)} placeholder="Digite a qtd atual no estoque"/>
-                    <input type="text" value={newVendas} onChange={e => setNewVendas(e.target.value)} placeholder="Digite a quantidade vendida"/>
-                    <button type="submit">Cadastrar</button>
-                </form>
+        <input type="text" value={newNome} onChange={e => setNewNome(e.target.value)} placeholder="Digite o Produto"/>
+        <input type="text" value={newValorCompra} onChange={e => setNewValorCompra(e.target.value)} placeholder="Digite o valor do produto em estoque"/>
+        <input type="text" value={newValorCompraFinal} onChange={e => setNewValorCompraFinal(e.target.value)} placeholder="Digite o valor do produto comprado"/>
+        <input type="text" value={newEstoqueInicial} onChange={e => setNewEstoqueInicial(e.target.value)} placeholder="Digite a qtd inicial no estoque"/>
+        <input type="text" value={newEstoqueFinal} onChange={e => setNewEstoqueFinal(e.target.value)} placeholder="Digite a qtd atual no estoque"/>
+        <input type="text" value={newVendas} onChange={e => setNewVendas(e.target.value)} placeholder="Digite a quantidade vendida"/>
+        <button type="submit">Cadastrar</button>
+    </form>
   </div>
 );
 return (
