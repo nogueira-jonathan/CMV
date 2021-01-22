@@ -4,11 +4,13 @@ import styled from 'styled-components';
 
 export const Tabela = styled.div` 
     
-    position: absolute;
+    position: relative;
     margin:60px;
     column-rule-width: 1px;
     border: 1px solid #ddd;
     background: whitesmoke;
+    margin-top: 100px;
+    
     
     border-radius: 10px;
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
@@ -45,7 +47,8 @@ export const ModalCMV = styled.div`
     margin: 50px auto;
     border-radius: 5px;
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-    max-width: 30%;
+    max-width: 80%;
+    height: 200px;
     justify-content: left;
     form {
         background-color: #ffffff;
@@ -104,6 +107,21 @@ export const ModalCMV = styled.div`
   
 `;
 
+
+export const Container = styled.div`
+    display: flex;
+    flex-direction:row;
+`;
+
+export const Content = styled.div`
+    display:flex;
+    flex: 1;
+    flex-direction:column;
+    justify-content: center;
+    align-items:center;
+    padding-bottom:25px;
+    `;
+
 export const Botao = styled.div`
 
     float: right;
@@ -123,7 +141,7 @@ export const Form = styled.div`
     
     
     input{
-        width: 350px;
+        width: 335px;
         border:0;
         color: black;
         padding: 10px;
@@ -156,7 +174,7 @@ export const Form = styled.div`
         border-radius: 8px;
         transition: 0.2s;
         &:hover{
-            background-color: #46d900;
+            background-color: red;
             color: #fafafa;
         }
     }

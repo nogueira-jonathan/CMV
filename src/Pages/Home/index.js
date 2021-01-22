@@ -1,30 +1,23 @@
 import React from 'react';
-import { Container, AppBar } from './styles';
-import { Link } from 'react-router-dom';
-import Toolbar from '@material-ui/core/Toolbar';
+import DrawerComponent from '../../Components/Drawer'
+import {Container, Content, Background} from './styles'
 
-export default function ButtonAppBar() {
-  
+const Produtos = () => {
 
-  return (
+    return(
     <Container>
-      <AppBar position="static">
-        <Toolbar>
-          
-          <Link to="/produtos" id="btnapp" color="inherit">Produtos</Link>
-          
-        </Toolbar>
-      </AppBar>
-        
-
-         
+        <DrawerComponent/>
+        <Content>
+    
+        <Background/>
+        </Content>
     </Container>
     
-    
-  );
+
+   
+    );
 }
 
- 
 
-    
+export default Produtos;
 

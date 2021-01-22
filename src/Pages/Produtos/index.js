@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import api from '../../Services/api';
-import {Tabela, Botao, Form } from '../Produtos/styles';
+import {Tabela, Botao, Form, Container, Content } from './styles';
 import Table from '@material-ui/core/Table';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
+import DrawerComponent from '../../Components/Drawer'
+import { FiTrash2 } from 'react-icons/fi'
 import jsPDF from 'jspdf'
 import 'jspdf-autotable'
+
 
 const Produtos = () => {
     const [modalStyle] = React.useState(getModalStyle);
@@ -85,8 +88,6 @@ const Produtos = () => {
         vendas: newVendas
     };
 
-    
-
     try {
         await api.post(`/produtos`, params);
         loadProdutos();
@@ -102,6 +103,11 @@ const Produtos = () => {
     }
 }
 
+const removerProduto = async (produto) => {
+  await api.delete(`produtos/produto/${produto.id}`)
+  loadProdutos();
+}
+
 function criadorPDF() {
   const doc = new jsPDF();
   
@@ -113,21 +119,23 @@ const body = (
   <div style={modalStyle, {backgroundColor:"grey", margin: "290px", }} className={classes.paper}  >
     <form onSubmit={inserirProduto} >
                     
-        <input type="text" value={newNome} onChange={e => setNewNome(e.target.value)} placeholder="Digite o Produto"/>
-        <input type="text" value={newValorCompra} onChange={e => setNewValorCompra(e.target.value)} placeholder="Digite o valor do produto em estoque"/>
-        <input type="text" value={newValorCompraFinal} onChange={e => setNewValorCompraFinal(e.target.value)} placeholder="Digite o valor do produto comprado"/>
-        <input type="text" value={newEstoqueInicial} onChange={e => setNewEstoqueInicial(e.target.value)} placeholder="Digite a qtd inicial no estoque"/>
-        <input type="text" value={newEstoqueFinal} onChange={e => setNewEstoqueFinal(e.target.value)} placeholder="Digite a qtd atual no estoque"/>
-        <input type="text" value={newVendas} onChange={e => setNewVendas(e.target.value)} placeholder="Digite a quantidade vendida"/>
+        <input type="text" value={newNome} onChange={e => setNewNome(e.target.value)} placeholder="Digite o Produto" required/>
+        <input type="text" value={newValorCompra} onChange={e => setNewValorCompra(e.target.value)} placeholder="Digite o valor do produto em estoque" required/>
+        <input type="text" value={newValorCompraFinal} onChange={e => setNewValorCompraFinal(e.target.value)} placeholder="Digite o valor do produto comprado" required/>
+        <input type="text" value={newEstoqueInicial} onChange={e => setNewEstoqueInicial(e.target.value)} placeholder="Digite a qtd inicial no estoque" required/>
+        <input type="text" value={newEstoqueFinal} onChange={e => setNewEstoqueFinal(e.target.value)} placeholder="Digite a qtd atual no estoque" required/>
+        <input type="text" value={newVendas} onChange={e => setNewVendas(e.target.value)} placeholder="Digite a quantidade vendida" required/>
         <button type="submit">Cadastrar</button>
     </form>
   </div>
 );
+
 return (
-  
-
+  <Container>
+  <DrawerComponent/>
+  <Content>
     <Tabela>
-
+      
       <Table >     
             <table id="simple_table">
                   <tr >
@@ -138,7 +146,7 @@ return (
                       <th>Estoque</th>
                       <th>Qtd. Comprada</th>
                       <th>Qtd. Vendida</th>
-                      <th>CMV</th>
+                      <th>Remover</th>
                       
                   </tr>
                   {produtos.map((produto) => {
@@ -146,12 +154,13 @@ return (
                       <tr key={produto.id}  >                       
                           <td style={{width:"10px"}}>{produto.id}</td> 
                           <td >{produto.nome}</td>
-                          <td>{produto.valorCompra}</td>
-                          <td>{produto.valorCompraFinal}</td>
+                          <td>{(produto.valorCompra).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}</td>
+                          <td>{(produto.valorCompraFinal).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}</td>
                           <td>{produto.estoqueInicial}</td>
                           <td>{produto.estoqueFinal}</td>
                           <td>{produto.vendas}</td>
-                          <td>{((produto.valorCompra + produto.valorCompraFinal)/(produto.estoqueInicial + produto.estoqueFinal)*produto.vendas).toPrecision(3)}</td>
+                          <td><button><FiTrash2 size={22} onClick={() => removerProduto(produto)} style={{ opacity: 0.7 }} /></button></td>
+                          
                                               
                       </tr>                        
                       )
@@ -187,6 +196,8 @@ return (
       </Modal>
 
     </Tabela>
+    </Content>
+</Container>
     
   );
 }
